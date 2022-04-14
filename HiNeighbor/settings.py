@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,8 +80,10 @@ WSGI_APPLICATION = 'HiNeighbor.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'neighbor',
+        'USER': 'moringa',
+        'PASSWORD':'Access',
     }
 }
 
@@ -116,7 +122,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = 'static/'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -129,3 +141,9 @@ LOGIN_REDIRECT_URL='index'
 LOGOUT_REDIRECT_URL='login'
 
 LOGIN_URL='/user/login/'
+# adding config
+cloudinary.config( 
+  cloud_name = 'dbmprxkja', 
+  api_key = '934679428694675', 
+  api_secret = 'KPYcLgUjm71mz8lOmYb3LlXV7xs' 
+)
