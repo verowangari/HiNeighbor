@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import SignupForm, UserUpdateForm, ProfileUpdateForm
+from .forms import SignupForm, UserUpdateForm, ProfileUpdateForm,NewPostForm
 from .models import Post
 
 # Create your views here.
@@ -81,3 +81,17 @@ def profile(request):
     }
 
     return render(request, 'profile.html', context)
+
+def NewPost(request):
+    current_user=request.user
+    if request.method == 'POST':
+        form = NewPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_post=form.save(commit=False)
+            new_post.profile=current_user
+            new_post.save()
+            print('post saved')
+            return redirect(index)
+    else:
+        form = NewPostForm()
+    return render(request, 'newpost.html',{'form':form})

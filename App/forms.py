@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
+from .models import Profile,Post
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -69,6 +69,10 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ['name','image','location','idNo','bio']
         
+class NewPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title','post','picture','hood','user']	
         
         
         
