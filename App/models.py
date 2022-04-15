@@ -7,9 +7,11 @@ from PIL import Image
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) # Delete profile when user is deleted
+    name = models.CharField(max_length=80, blank=True)
     idNo = models.IntegerField(default=0)
     bio = models.TextField(max_length=254, blank=True)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    location = models.CharField(max_length=50, blank=True, null=True)
     # neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,null=True,blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     emailaddress = models.CharField(max_length=50)
@@ -18,8 +20,8 @@ class Profile(models.Model):
         return f'{self.user.username} Profile' #show how we want it to be displayed
     
     # Override the save method of the model
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
 
         img = Image.open(self.image.path) # Open image
         

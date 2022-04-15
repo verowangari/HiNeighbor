@@ -17,9 +17,12 @@ def Signup(request):
 			username = form.cleaned_data.get('username')
 			email = form.cleaned_data.get('email')
 			password = form.cleaned_data.get('password')
+            
+        
+            
    
             
-			User.objects.create_user(username=username, email=email, password=password)
+			User.objects.create_user(username=username, email=email, password=password,bio=bio)
 			return redirect('index')
         
 	else:
@@ -31,7 +34,29 @@ def Signup(request):
 
 	return render(request, 'signup.html', context)
 
-
+# def Signup(request):
+#     if request.method =='POST':
+#         form =SignupForm(request.POST)
+#         if form.is_valid():
+#             username=form.cleaned_data.get('username')
+#             email=form.cleaned_data.get('email')
+#             password=form.cleaned_data.get('password')
+#             bio=form.cleaned_data.get('bio')
+#             idNo=form.cleaned_data.get('idNo')
+            
+#             User.objects.create_user(username=username,email=email,password=password,bio=bio,idNo=idNo)
+#             return redirect('index')
+        
+#         else:
+#             form=SignupForm()
+            
+#         context= {
+#                 'form':form,
+#             }
+            
+#         return render(request,'signup.html',context)
+        
+        
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
