@@ -2,10 +2,12 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import SignupForm, UserUpdateForm, ProfileUpdateForm
+from .models import Post
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    post_items = Post.objects.all()
+    return render(request, 'index.html', {"post_items": post_items})
 
 def login(request):
   return render(request, 'login.html')
