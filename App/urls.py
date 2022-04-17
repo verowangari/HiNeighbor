@@ -10,4 +10,9 @@ urlpatterns=[
     path('newpost/', views.NewPost, name='newpost'),
     path('newhood/', views.CreateHood, name='newhood'),
     path('allhoods/', views.hoods, name='allhoods'),
+    path('join_hood/<id>', views.join_hood, name='join-hood'),
+    path('leave_hood/<id>', views.leave_hood, name='leave-hood'),
+    path('singlehood/<hood_id>', views.SingleHood, name='singlehood'),
+    path('<hood_id>/members', views.hood_members, name='members'),
+    path('search/', views.search, name='search'),
 ]

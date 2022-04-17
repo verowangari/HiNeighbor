@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile,Post,NeighbourHood
+from .models import Profile,Post,NeighbourHood,Business
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -79,3 +79,9 @@ class NeighbourHoodForm(forms.ModelForm):
     class Meta:
         model = NeighbourHood
         fields=['name','location','hood_logo','description','health_contact','police_contact']
+        
+        
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ('user', 'neighbourhood')
