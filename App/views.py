@@ -167,7 +167,7 @@ def search(request):
             'results': results,
             'message': message
         }
-        return render(request, 'results.html', params)
+        return render(request, 'search.html', params)
     else:
         message = "You haven't searched for any business category"
     return render(request, "search.html")
