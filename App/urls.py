@@ -9,4 +9,5 @@ urlpatterns=[
     path('signup/', Signup, name='signup'),
     path('newpost/', views.NewPost, name='newpost'),
     path('newhood/', views.CreateHood, name='newhood'),
+    path('allhoods/', views.hoods, name='allhoods'),
 ]

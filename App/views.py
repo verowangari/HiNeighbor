@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import SignupForm, UserUpdateForm, ProfileUpdateForm,NewPostForm,NeighbourHoodForm
-from .models import Post
+from .models import Post,NeighbourHood
 
 # Create your views here.
 def index(request):
@@ -106,3 +106,11 @@ def CreateHood(request):
     else:
         form = NeighbourHoodForm()
     return render(request, 'newhood.html', {'form': form})
+
+def hoods(request):
+    all_hoods = NeighbourHood.objects.all()
+    all_hoods = all_hoods[::-1]
+    context = {
+        'all_hoods': all_hoods,
+    }
+    return render(request, 'allhoods.html', context)
