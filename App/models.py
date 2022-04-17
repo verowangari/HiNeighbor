@@ -5,32 +5,7 @@ from PIL import Image
 
 
 # Create your models here.
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE) # Delete profile when user is deleted
-    name = models.CharField(max_length=80, blank=True)
-    idNo = models.IntegerField(default=0)
-    bio = models.TextField(max_length=254, blank=True)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-    location = models.CharField(max_length=50, blank=True, null=True)
-    # neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,null=True,blank=True)
-    date_created = models.DateTimeField(auto_now_add=True)
-    emailaddress = models.CharField(max_length=50)
 
-    def __str__(self):
-        return f'{self.user.username} Profile' #show how we want it to be displayed
-    
-    # Override the save method of the model
-    def save(self, *args, **kwargs):
-        super(Profile, self).save(*args, **kwargs)
-
-        img = Image.open(self.image.path) # Open image
-        
-        # resize image
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size) # Resize image
-            img.save(self.image.path) # Save it again and override the larger image
-    
 class NeighbourHood(models.Model):
     name = models.CharField(max_length=50)
     location = models.CharField(max_length=60)
@@ -54,6 +29,35 @@ class NeighbourHood(models.Model):
         return cls.objects.filter(id=neighborhood_id)
 
 
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE) # Delete profile when user is deleted
+    name = models.CharField(max_length=80, blank=True)
+    idNo = models.IntegerField(default=0)
+    bio = models.TextField(max_length=254, blank=True)
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    location = models.CharField(max_length=50, blank=True, null=True)
+    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE,null=True,blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    emailaddress = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f'{self.user.username} Profile' #show how we want it to be displayed
+    
+    # Override the save method of the model
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
+
+        img = Image.open(self.image.path) # Open image
+        
+        # resize image
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size) # Resize image
+            img.save(self.image.path) # Save it again and override the larger image
+    
+
     
     
 class Post(models.Model):
@@ -63,3 +67,26 @@ class Post(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post_owner')
     hood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, related_name='hood_post')
+    
+    
+    
+class Business(models.Model):
+    name = models.CharField(max_length=120)
+    email = models.EmailField(max_length=254)
+    description = models.TextField(blank=True)
+    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, related_name='business')
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='owner')
+
+    def __str__(self):
+        return f'{self.name} Business'
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def search_business(cls, name):
+        return cls.objects.filter(name__icontains=name).all()
+    
