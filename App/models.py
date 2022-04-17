@@ -11,7 +11,7 @@ class NeighbourHood(models.Model):
     location = models.CharField(max_length=60)
     admin = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name='hood',null=True)
     hood_logo = CloudinaryField('hood_logo',null=True)
-    description = models.TextField()
+    description = models.TextField(max_length=100)
     health_contact = models.IntegerField(null=True, blank=True)
     police_contact = models.IntegerField(null=True, blank=True)
 
