@@ -1,7 +1,7 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import SignupForm, UserUpdateForm, ProfileUpdateForm,NewPostForm,NeighbourHoodForm
+from .forms import SignupForm, UserUpdateForm, ProfileUpdateForm,NewPostForm,NeighbourHoodForm,BusinessForm
 from .models import Post,NeighbourHood,Business
 
 # Create your views here.
