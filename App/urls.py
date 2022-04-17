@@ -8,4 +8,5 @@ urlpatterns=[
     path('logout/', authViews.LogoutView.as_view(), {'next_page' : 'index'}, name='logout'),
     path('signup/', Signup, name='signup'),
     path('newpost/', views.NewPost, name='newpost'),
+    path('newhood/', views.CreateHood, name='newhood'),
 ]

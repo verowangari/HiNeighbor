@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import SignupForm, UserUpdateForm, ProfileUpdateForm,NewPostForm
+from .forms import SignupForm, UserUpdateForm, ProfileUpdateForm,NewPostForm,NeighbourHoodForm
 from .models import Post
 
 # Create your views here.
@@ -24,7 +24,7 @@ def Signup(request):
             
    
             
-			User.objects.create_user(username=username, email=email, password=password,bio=bio)
+			User.objects.create_user(username=username, email=email, password=password)
 			return redirect('index')
         
 	else:
@@ -95,3 +95,14 @@ def NewPost(request):
     else:
         form = NewPostForm()
     return render(request, 'newpost.html',{'form':form})
+def CreateHood(request):
+    if request.method == 'POST':
+        form = NeighbourHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.admin = request.user.profile
+            hood.save()
+            return redirect('allhoods')
+    else:
+        form = NeighbourHoodForm()
+    return render(request, 'newhood.html', {'form': form})

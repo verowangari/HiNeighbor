@@ -75,4 +75,7 @@ class NewPostForm(forms.ModelForm):
         fields = ['title','post','picture','hood','user']	
         
         
-        
+class NeighbourHoodForm(forms.ModelForm):
+    class Meta:
+        model = NeighbourHood
+        fields=['name','location','hood_logo','description','health_contact','police_contact']
