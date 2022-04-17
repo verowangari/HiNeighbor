@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'HiNeighbor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'neighborip',
+        'NAME': 'evening',
         'USER': 'moringa',
         'PASSWORD':'Access',
     }

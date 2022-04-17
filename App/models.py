@@ -7,10 +7,10 @@ from PIL import Image
 # Create your models here.
 
 class NeighbourHood(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50,null=True)
     location = models.CharField(max_length=60)
-    admin = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name='hood')
-    hood_logo = CloudinaryField('hood_logo')
+    admin = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name='hood',null=True)
+    hood_logo = CloudinaryField('hood_logo',null=True)
     description = models.TextField()
     health_contact = models.IntegerField(null=True, blank=True)
     police_contact = models.IntegerField(null=True, blank=True)
