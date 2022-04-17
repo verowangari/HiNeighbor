@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import SignupForm, UserUpdateForm, ProfileUpdateForm,NewPostForm,NeighbourHoodForm,BusinessForm
-from .models import Post,NeighbourHood,Business
+from .models import Post,NeighbourHood,Business,Profile
 
 # Create your views here.
 def index(request):
@@ -171,3 +171,15 @@ def search(request):
     else:
         message = "You haven't searched for any business category"
     return render(request, "search.html")
+
+def CreateBusiness(request):
+    if request.method=='POST':
+        form=BusinessForm(request.POST,request.FILES)
+        if form.is_valid():
+            business=form.save(commit=False)
+            business.admin=request.user.profile
+            business.save()
+            return redirect ('index')
+    else:
+        form=BusinessForm()
+    return render(request,'newbusiness.html',{'form':form})

@@ -15,4 +15,5 @@ urlpatterns=[
     path('singlehood/<hood_id>', views.SingleHood, name='singlehood'),
     path('<hood_id>/members', views.hood_members, name='members'),
     path('search/', views.search, name='search'),
+    path('newbusiness/', views.CreateBusiness, name='newbusiness'),
 ]
