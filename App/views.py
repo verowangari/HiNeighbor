@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import SignupForm, UserUpdateForm, ProfileUpdateForm,NewPostForm,NeighbourHoodForm,BusinessForm
 from .models import Post,NeighbourHood,Business,Profile
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+@login_required(login_url='login')  
 def index(request):
     post_items = Post.objects.all()
     return render(request, 'index.html', {"post_items": post_items})
@@ -58,7 +59,7 @@ def Signup(request):
             
 #         return render(request,'signup.html',context)
         
-        
+@login_required(login_url='login')      
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)

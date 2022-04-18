@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block styles %}
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -17,10 +17,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> 
   <!-- bulma -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet">  
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+ 
     {% endblock %}
     <title>Hi neighbor!</title>
 </head>
@@ -43,7 +44,7 @@
         </a></li> 
 
         <li><a href="{% url 'newhood' %}" class="button is-light">
-            
+          <i class="fas fa-light fa-plus"></i>
             New Hood
           </a></li>
 
@@ -57,11 +58,11 @@
         {% else %}
         <li class="mb-4">
             <a href=""> &nbsp;
-                No Hood Yet
+                Choose Hood
             </a>
         </li>
         {% endif %}
-        <li><a href="#">Hoods</a></li>
+        
       </ul>
       
       
@@ -73,7 +74,7 @@
              <div class="control">
              <input class="input" name="searched" type="Search" placeholder="Search for a user"> </div>
              <div class="control">
-             <button class="button is-light" type="submit">Search</button> </div>
+            
         
             </div>
            </form></li>
