@@ -12,19 +12,20 @@
                     </div>
                     <div class="col-md-7">
                         <div class="card-body">
-                            <h5 class="card-title tt">{{ hood.name }} ({{hood.location}})
+                            <h5 class="card-title tt">{{ hood.name }} ~{{hood.location}}
                             </h5>
+                            <p class="card-text">Admin: <small class="text-muted">
+                                {{ hood.admin.user.username }}</small></p>
                             <h6 class="card-text">
                                 <span><strong>{{hood.members.count}}</strong> Member{{hood.members.count|pluralize}}</span>
-                                | <strong>{{ hood.business.count }}</strong> Businesses | <strong>
+                                <br> <strong>{{ hood.business.count }}</strong> Businesses <br> <strong>
                                 {{ hood.hood_post.count }}</strong> Post{{ hood.hood_post.count|pluralize }}
                             </h6>
                             <p class="card-text">{{hood.description}}</p>
                             <p class="card-text"><span class="text-info">Police Contact</span>
-                                &nbsp;<strong>{{hood.police_contact}}</strong> |
+                                &nbsp;<strong>{{hood.police_contact}}</strong> <br>
                                 <span class="text-info">Hospital Contact</span> <strong>{{hood.health_contact}}</strong></p>
-                            <p class="card-text">Admin: <small class="text-muted">
-                                {{ hood.admin.user.username }}</small></p>
+                            
                         </div>
                     </div>
                 </div>
@@ -71,8 +72,7 @@
                                 <h5 class="card-title">{{post.title}}</h5>
                                 <p class="card-text">" {{post.post}} "
                                 </p>
-                                <p class="card-text">By: <small class="text-white">
-                                    {{ post.profile.user.username|title }}</small> <small style="float:right">{{post.date|date}}</small>
+                                <p class="card-text"> <small style="float:left">{{post.date|date}}</small>
                                 </p>
                             </div>
                         </div>
