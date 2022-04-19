@@ -87,12 +87,18 @@ def NewPost(request):
     current_user=request.user
     if request.method == 'POST':
         form = NewPostForm(request.POST, request.FILES)
+        neighborhood = NeighbourHood.objects.filter(admin__user__id=request.user.id).first()
+        print(f'The neighborhood {neighborhood}')
+        form.instance.hood = neighborhood
+        profile = Profile.objects.filter(user__id=current_user.id).first()
+        form.instance.user = profile
         if form.is_valid():
             new_post=form.save(commit=False)
-            new_post.profile=current_user
             new_post.save()
             print('post saved')
             return redirect(index)
+        else:
+            print("The form isn't valid")
     else:
         form = NewPostForm()
     return render(request, 'newpost.html',{'form':form})

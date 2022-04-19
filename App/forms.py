@@ -72,7 +72,7 @@ class ProfileUpdateForm(forms.ModelForm):
 class NewPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title','post','picture','hood','user']
+        fields = ('title','post','picture')
         
         
 class NeighbourHoodForm(forms.ModelForm):
